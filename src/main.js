@@ -5,6 +5,9 @@ import App from './App'
 import router from './router'
 import './style/base.styl'
 import './utils/fontSize'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
+Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
