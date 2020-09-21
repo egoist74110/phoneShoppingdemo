@@ -1,0 +1,20 @@
+ul{
+      height: 0.8rem;
+      display: flex;
+      align-items: center;
+      li{
+        height: 0.5rem;
+        width: 1.6rem;
+        text-align: center;
+        &:hover{
+          border-left: 0.08rem solid @bg;
+        }
+        a{
+          font-size: 0.18rem;
+          line-height: 0.5rem;
+          &:hover{
+            color: @bg;
+          }
+        }
+      }
+    }

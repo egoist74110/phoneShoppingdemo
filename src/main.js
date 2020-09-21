@@ -6,7 +6,6 @@ import router from './router'
 import './style/base.styl'
 import './utils/fontSize'
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
