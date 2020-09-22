@@ -6,13 +6,13 @@
       <router-link to="/home" class="iconfont icon-gengduo"></router-link>
     </header>
     <main>
-      <div v-swiper:mySwiper="swiperOption">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" :key="banner.id" v-for="banner in banners">
-            <img :src="'http://localhost:3000'+banner.img" alt="">
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
+      <div class="banner">
+        <swiper :options="swiperOption" ref="mySwiper" v-if="banners.length">
+          <swiper-slide v-for="(item,index) in banners" :key="item.id"><img :src="'http://localhost:3000'+item.img" :alt="item.title"></swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+          <!-- <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div> -->
+        </swiper>
       </div>
     </main>
   </div>
@@ -20,31 +20,52 @@
 
 <script>
   import {
-    Swiper,
-    SwiperSlide,
-    directive
-  } from 'vue-awesome-swiper'
-  import 'swiper/swiper-bundle.css'
+    swiper,
+    swiperSlide
+  } from "vue-awesome-swiper";
+  import "swiper/dist/css/swiper.css";
   export default {
+    components: {
+      swiper,
+      swiperSlide
+    },
     data() {
       return {
-        banners: [],
+        banners:[],
         swiperOption: {
-          pagination: {
-            el: '.swiper-pagination'
+          loop: true,
+          autoplay: {
+            delay: 3000,
+            stopOnLastSlide: false,
+            disableOnInteraction: false
           },
-          loop:true,
-          // ...
+          // 显示分页
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: false //允许分页点击跳转
+          },
+          // 设置点击箭头
+          navigation: {
+            // nextEl: ".swiper-button-next",
+            // prevEl: ".swiper-button-prev"
+          }
         }
+      };
+    },
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper;
       }
     },
     mounted() {
-      this.$http.get('getbanner').then(res=>{
+      this.$http.get('/getbanner').then(res=>{
         this.banners = res.data.list;
       })
-      this.mySwiper.slideTo(3, 1000, false)
+      // current swiper instance
+      // 然后你就可以使用当前上下文内的swiper对象去做你想做的事了
+      // this.swiper.slideTo(3, 1000, false);
     }
-  }
+  };
 
 </script>
 
@@ -71,7 +92,7 @@
         text-align center
     #logo
       display inline-block
-      width 1.47rem
+      width 1.5rem
       height .3rem
   main
       .banner
