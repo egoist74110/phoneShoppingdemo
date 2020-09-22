@@ -9,7 +9,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
 import http from './http'
 Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
-// Vue.prototype.$http = http
+Vue.prototype.$http = http
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({

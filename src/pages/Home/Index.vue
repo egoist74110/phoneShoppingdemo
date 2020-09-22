@@ -8,8 +8,8 @@
     <main>
       <div v-swiper:mySwiper="swiperOption">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" :key="index" v-for="(banner,index) in banners">
-            <img :src="banner" alt="">
+          <div class="swiper-slide" :key="banner.id" v-for="banner in banners">
+            <img :src="'http://localhost:3000'+banner.img" alt="">
           </div>
         </div>
         <div class="swiper-pagination"></div>
@@ -28,7 +28,7 @@
   export default {
     data() {
       return {
-        banners: ['../../../static/img/index_images/banner.jpg', '../../../static/img/index_images/banner - 副本 (3).jpg', '../../../static/img/index_images/banner - 副本 (2).jpg'],
+        banners: [],
         swiperOption: {
           pagination: {
             el: '.swiper-pagination'
@@ -39,6 +39,9 @@
       }
     },
     mounted() {
+      this.$http.get('getbanner').then(res=>{
+        this.banners = res.data.list;
+      })
       this.mySwiper.slideTo(3, 1000, false)
     }
   }
