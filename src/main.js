@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import './style/base.styl'
 import './utils/fontSize'
+import './style/font/iconfont.css'
 import http from './http'
 
 Vue.prototype.$http = http
