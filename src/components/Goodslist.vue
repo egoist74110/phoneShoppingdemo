@@ -5,7 +5,7 @@
       <div class="good">
         <strong>{{item.goodsname}}</strong>
         <p>{{item.price}}</p>
-        <button>立即抢购</button>
+        <button @click="jump(item.id)">立即抢购</button>
       </div>
     </div>
   </div>
@@ -16,7 +16,11 @@ export default {
   data() {
     return {};
   },
-
+  methods:{
+    jump(i){
+      this.$router.push("/detail?id="+i);
+    }
+  },
   props: {
     goodslist: {
       required: true,
